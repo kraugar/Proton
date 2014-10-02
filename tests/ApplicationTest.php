@@ -38,7 +38,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($emitter->hasListeners('request.received'));
 
         $foo = null;
-        $app->subscribe('response.before', function ($event) use (&$foo) {
+        $app->subscribe('response.before', function () use (&$foo) {
             $foo = 'bar';
         });
 
@@ -106,7 +106,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $request = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
 
         try {
-            $response = $app->handle($request, 1, false);
+            $app->handle($request, 1, false);
         } catch (\Exception $e) {
             $this->assertTrue($e instanceof \Orno\Http\Exception\NotFoundException);
         }
