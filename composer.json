@@ -38,6 +38,6 @@
                 "ProtonTests\\": "tests/"
             }
         }
-    }
+    },
     "minimum-stability": "dev"
 }
