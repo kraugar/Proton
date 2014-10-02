@@ -1,5 +1,11 @@
 # Proton
 
+[![Latest Version](http://img.shields.io/packagist/v/alexbilbie/proton.svg?style=flat-square)](https://github.com/alexbilbie/proton/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)<br />
+[![Build Status](https://img.shields.io/travis/alexbilbie/proton/master.svg?style=flat-square)](https://travis-ci.org/alexbilbie/proton)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/alexbilbie/proton.svg?style=flat-square)](https://scrutinizer-ci.com/g/alexbilbie/proton/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/alexbilbie/proton.svg?style=flat-square)](https://scrutinizer-ci.com/g/alexbilbie/proton)
+
 Proton is a [StackPHP](http://stackphp.com/) compatible micro framework.
 
 Under the hood it uses [Orno\Route](https://github.com/orno/route) for routing, [Orno\Di](https://github.com/orno/di) for dependency injection, and [League\Event](https://github.com/thephpleague/event) for event dispatching.
