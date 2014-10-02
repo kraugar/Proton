@@ -25,10 +25,19 @@
         "orno/di": "2.*",
         "league/event": "1.*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
     "autoload": {
         "psr-4": {
             "Proton\\": "src/"
         }
     },
+    "autoload-dev": {
+            "psr-4": {
+                "ProtonTests\\": "tests/"
+            }
+        }
+    }
     "minimum-stability": "dev"
 }
