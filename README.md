@@ -2,6 +2,8 @@
 
 Proton is a StackPHP compatible micro framework.
 
+Under the hood it uses [Orno\Route](https://github.com/orno/route) for routing, [Orno\Di](https://github.com/orno/di) for dependency injection, and [League\Event](https://github.com/thephpleague/event) for event dispatching.
+
 ## Installation
 
 Run `composer require alexbilbie/proton` inside you project root or add `"alexbilbie/proton": "0.1.*"` to your `composer.json` file.
