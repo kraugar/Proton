@@ -38,33 +38,33 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
 
     public function get($route, $action)
     {
-        $router->addRoute('GET', $route, $action);
+        $this->router->addRoute('GET', $route, $action);
     }
 
     public function post($route, $action)
     {
-        $router->addRoute('POST', $route, $action);
+        $this->router->addRoute('POST', $route, $action);
     }
 
     public function put($route, $action)
     {
-        $router->addRoute('PUT', $route, $action);
+        $this->router->addRoute('PUT', $route, $action);
     }
 
     public function delete($route, $action)
     {
-        $router->addRoute('DELETE', $route, $action);
+        $this->router->addRoute('DELETE', $route, $action);
     }
 
     public function patch($route, $action)
     {
-        $router->addRoute('PATCH', $route, $action);
+        $this->router->addRoute('PATCH', $route, $action);
     }
 
     public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
     {
         $this->eventEmitter->emit(
-            new (Events\RequestReceivedEvent($request)
+            (new Events\RequestReceivedEvent($request))
         );
 
         try {
@@ -76,7 +76,7 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
             );
 
             $this->eventEmitter->emit(
-                new (Events\ResponseBeforeEvent($request)
+                (new Events\ResponseBeforeEvent($request))
             );
 
             return $response;
@@ -93,7 +93,7 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
                 'error' =>  [
                     'message'   =>  $e->getMessage(),
                     'trace'     =>  $e->getTrace()
-                ];
+                ]
             ]));
 
             return $response;
@@ -103,7 +103,7 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
     public function terminate(Request $request, Response $response)
     {
         $this->eventEmitter->emit(
-            new (Events\ResponseAfterEvent($request)
+            (new Events\ResponseAfterEvent($request))
         );
     }
 
