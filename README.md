@@ -22,12 +22,14 @@ $app = new Proton\Application();
 
 $app->get('/', function ($request, $response) {
     $response->setContent('<h1>It works!</h1>');
+    return $response;
 });
 
 $app->get('/hello/{name}', function ($request, $response, $args) {
     $response->setContent(
         sprintf('<h1>Hello, %s!</h1>', $args['name'])
     );
+    return $response;
 });
 
 $app->run();
@@ -61,9 +63,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeController
 {
-    public function index(Request $request, Response $response, $args)
+    public function index(Request $request, Response $response, array $args)
     {
         $response->setContent('<h1>It works!</h1>');
+        return $response;
     }
 }
 ```
@@ -79,6 +82,7 @@ $app = new Snapcam\Api\Application();
 
 $app->get('/', function ($request, $response) {
     $response->setContent('<h1>It works!</h1>');
+    return $response;
 });
 
 $stack = (new Stack\Builder())
