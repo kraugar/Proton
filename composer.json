@@ -1,0 +1,34 @@
+{
+    "name": "alexbilbie/proton",
+    "type": "library",
+    "description": "Micro PHP framework",
+    "keywords": [
+        "framework",
+        "StackPHP",
+        "HttpKernelInterface",
+        "middleware",
+        "micro",
+        "proton"
+    ],
+    "homepage": "https://github.com/alexbilbie/proton",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alex Bilbie",
+            "email": "hello@alexbilbie.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/http-kernel": "2.5.*",
+        "orno/route": "1.*",
+        "orno/di": "2.*",
+        "league/event": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Proton\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
