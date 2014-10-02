@@ -6,7 +6,7 @@ Under the hood it uses [Orno\Route](https://github.com/orno/route) for routing, 
 
 ## Installation
 
-Just add `"alexbilbie/proton": "0.1.*"` to your `composer.json` file.
+Just add `"alexbilbie/proton": "1.0.*"` to your `composer.json` file.
 
 ## Setup
 
