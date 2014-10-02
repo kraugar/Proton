@@ -121,7 +121,11 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
     }
 
     /**
-     * (@inheritdoc)
+     * Handle the request
+     * @param  \Symfony\Component\HttpFoundation\Request $request
+     * @param  int $type
+     * @param  boolean $catch
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
     {
