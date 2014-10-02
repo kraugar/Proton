@@ -34,9 +34,8 @@
         }
     },
     "autoload-dev": {
-            "psr-4": {
-                "ProtonTests\\": "tests/"
-            }
+        "psr-4": {
+            "ProtonTests\\": "tests/"
         }
     },
     "minimum-stability": "dev"
