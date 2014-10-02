@@ -84,7 +84,7 @@ Basic usage with StackPHP (using `Stack\Builder` and `Stack\Run`):
 <?php
 require __DIR__.'/../vendor/autoload.php';
 
-$app = new Snapcam\Api\Application();
+$app = new Proton\Application();
 
 $app->get('/', function ($request, $response) {
     $response->setContent('<h1>It works!</h1>');
