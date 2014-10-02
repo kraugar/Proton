@@ -11,6 +11,8 @@ abstract class ProtonEvent extends AbstractEvent
     protected $request;
     protected $response;
 
+    const NAME = 'proton.event';
+
     public function __construct(Request $request, Response $response = null)
     {
         $this->request = $request;
