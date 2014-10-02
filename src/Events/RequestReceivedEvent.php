@@ -4,5 +4,11 @@ namespace Proton\Events;
 
 class RequestReceivedEvent extends ProtonEvent
 {
-    const NAME = 'request.received';
+    /**
+     * (@inheritdoc)
+     */
+    public function getName()
+    {
+        return 'request.received';
+    }
 }

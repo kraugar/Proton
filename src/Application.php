@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * The Proton Micro Framework
+ *
+ * @author  Alex Bilbie <hello@alexbilbie.com>
+ * @license MIT
+ */
 namespace Proton;
 
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -11,14 +16,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Proton\Events;
 
+/**
+ * Proton Application Class
+ */
 class Application implements HttpKernelInterface, TerminableInterface, \ArrayAccess
 {
+    /**
+     * @var \Orno\Route\RouteCollection
+     */
     protected $router;
 
+    /**
+     * @var \League\Event\Emitter
+     */
     protected $eventEmitter;
 
+    /**
+     * @var \Orno\Di\Container
+     */
     protected $container;
 
+    /**
+     * New Application
+     * @return void
+     */
     public function __construct()
     {
         $this->container = new Container;
@@ -26,41 +47,82 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
         $this->eventEmitter = new EventEmitter;
     }
 
+    /**
+     * Returns the DI container
+     * @return \Orno\Di\Container
+     */
     public function getContainer()
     {
         return $this->container;
     }
 
+    /**
+     * Return the router
+     * @return \Orno\Route\RouteCollection
+     */
     public function getRouter()
     {
         return $this->router;
     }
 
+    /**
+     * Add a GET route
+     * @param string $route
+     * @param mixed $action
+     * @return void
+     */
     public function get($route, $action)
     {
         $this->router->addRoute('GET', $route, $action);
     }
 
+    /**
+     * Add a POST route
+     * @param string $route
+     * @param mixed $action
+     * @return void
+     */
     public function post($route, $action)
     {
         $this->router->addRoute('POST', $route, $action);
     }
 
+    /**
+     * Add a PUT route
+     * @param string $route
+     * @param mixed $action
+     * @return void
+     */
     public function put($route, $action)
     {
         $this->router->addRoute('PUT', $route, $action);
     }
 
+    /**
+     * Add a DELETE route
+     * @param string $route
+     * @param mixed $action
+     * @return void
+     */
     public function delete($route, $action)
     {
         $this->router->addRoute('DELETE', $route, $action);
     }
 
+    /**
+     * Add a PATCH route
+     * @param string $route
+     * @param mixed $action
+     * @return void
+     */
     public function patch($route, $action)
     {
         $this->router->addRoute('PATCH', $route, $action);
     }
 
+    /**
+     * (@inheritdoc)
+     */
     public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
     {
         $this->eventEmitter->emit(
@@ -76,7 +138,7 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
             );
 
             $this->eventEmitter->emit(
-                (new Events\ResponseBeforeEvent($request))
+                (new Events\ResponseBeforeEvent($request, $response))
             );
 
             return $response;
@@ -96,17 +158,29 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
                 ]
             ]));
 
+            $this->eventEmitter->emit(
+                (new Events\ResponseBeforeEvent($request, $response))
+            );
+
             return $response;
         }
     }
 
+    /**
+     * (@inheritdoc)
+     */
     public function terminate(Request $request, Response $response)
     {
         $this->eventEmitter->emit(
-            (new Events\ResponseAfterEvent($request))
+            (new Events\ResponseAfterEvent($request, $response))
         );
     }
 
+    /**
+     * Run the application
+     * @param  \Symfony\Component\HttpFoundation\Request $request
+     * @return string
+     */
     public function run(Request $request = null)
     {
         if (null === $request) {
@@ -119,6 +193,12 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
         $this->terminate($request, $response);
     }
 
+    /**
+     * Subscribe to an event
+     * @param  string $event
+     * @param  callable $listener
+     * @return void
+     */
     public function subscribe($event, $listener)
     {
         $this->eventEmitter->addListener($event, $listener);
@@ -126,7 +206,6 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
 
     /**
      * Array Access get
-     *
      * @param  string $key
      * @return mixed
      */
@@ -137,7 +216,6 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
 
     /**
      * Array Access set
-     *
      * @param  string $key
      * @param  mixed  $value
      * @return void
@@ -149,19 +227,16 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
 
     /**
      * Array Access unset
-     *
      * @param  string $key
      * @return void
      */
     public function offsetUnset($key)
     {
-        unset($this->container->items[$key]);
-        unset($this->container->singletons[$key]);
+        $this->container->offsetUnset($key);
     }
 
     /**
      * Array Access isset
-     *
      * @param  string $key
      * @return boolean
      */

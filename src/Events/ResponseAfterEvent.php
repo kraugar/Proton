@@ -4,5 +4,11 @@ namespace Proton\Events;
 
 class ResponseAfterEvent extends ProtonEvent
 {
-    const NAME = 'response.after';
+    /**
+     * (@inheritdoc)
+     */
+    public function getName()
+    {
+        return 'response.after';
+    }
 }
