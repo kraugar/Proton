@@ -129,6 +129,9 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
      */
     public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
     {
+        // Overwrite the Request object that Orno\Route uses by default
+        $this->container->add('Orno\Http\Request', $request);
+
         $this->eventEmitter->emit(
             (new Events\RequestReceivedEvent($request))
         );
