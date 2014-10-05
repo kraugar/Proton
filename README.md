@@ -55,7 +55,7 @@ $app['HomeController'] = function () {
     return new HomeController();
 });
 
-$app->get('/', 'HomeController@index');
+$app->get('/', 'HomeController::index'); // calls index method on HomeController class
 
 $app->run();
 ```
@@ -92,12 +92,12 @@ $app->get('/', function ($request, $response) {
 });
 
 $stack = (new Stack\Builder())
-    ->push('Some/MiddleWare');
-    ->push('Some/MiddleWare')
-    ->push('Some/MiddleWare');
+    ->push('Some/MiddleWare') // This will execute first
+    ->push('Some/MiddleWare') // This will execute second
+    ->push('Some/MiddleWare'); // This will execute third
 
 $app = $stack->resolve($app);
-Stack\run($app);
+Stack\run($app); // The app will run after all the middlewares have run
 ```
 
 ## Events
