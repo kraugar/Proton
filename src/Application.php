@@ -161,7 +161,7 @@ class Application implements HttpKernelInterface, TerminableInterface, \ArrayAcc
             $response->setContent(json_encode([
                 'error' =>  [
                     'message'   =>  $e->getMessage(),
-                    'trace'     =>  $e->getTrace()
+                    'trace'     =>  explode(PHP_EOL, $e->getTraceAsString())
                 ]
             ]));
 
